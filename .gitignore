@@ -1,1 +1,7 @@
+*.swo
+*.swp
 node_modules
+*.config.json
+npm-debug.log
+.DS_Store
+package-lock.json

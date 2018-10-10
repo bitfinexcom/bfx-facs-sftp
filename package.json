@@ -1,33 +1,40 @@
 {
-  "name": "bfx-facs-base",
+  "name": "bfx-facs-sftp",
   "version": "0.0.1",
-  "private": false,
-  "description": "Bitfinex Facility",
+  "private": true,
+  "description": "Bitfinex SFTP Facility",
   "author": {
     "name": "prdn",
     "email": "paolo@bitfinex.com"
   },
   "keywords": [
-    "bitfinex"
+    "bitfinex",
+    "sftp"
   ],
   "dependencies": {
-    "async": "^2.6.1",
-    "lodash": "^4.17.10"
+    "async": "~2.4.0",
+    "bfx-facs-base": "git+https://github.com/bitfinexcom/bfx-facs-base.git"
   },
   "engine": {
-    "node": ">=6.0"
+    "node": ">=8.0"
   },
-  "main": "base.js",
-  "license": "Apache-2.0",
+  "main": "s3.js",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "standard"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitfinexcom/bfx-facs-base.git"
+    "url": "git+https://github.com/bitfinexcom/bfx-facs-sftp.git"
   },
-  "homepage": "https://github.com/bitfinexcom/bfx-facs-base",
   "maintainers": [
     {
       "name": "prdn",
       "email": "paolo@bitfinex.com"
     }
-  ]
+  ],
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
 }
