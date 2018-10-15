@@ -13,7 +13,8 @@
   ],
   "dependencies": {
     "async": "~2.4.0",
-    "bfx-facs-base": "git+https://github.com/bitfinexcom/bfx-facs-base.git"
+    "bfx-facs-base": "git+https://github.com/bitfinexcom/bfx-facs-base.git",
+    "ssh2-sftp-client": "^3.1.0"
   },
   "engine": {
     "node": ">=8.0"
