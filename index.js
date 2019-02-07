@@ -4,13 +4,12 @@ const async = require('async')
 const fs = require('fs')
 const _ = require('lodash')
 const Base = require('bfx-facs-base')
-let Client = require('ssh2-sftp-client')
+const SFTP2 = require('ssh2-sftp-client')
 
 function client (conf, label) {
-  // create sft object
-  this.sftp = new Client()
+  const sftp = new SFTP2()
 
-  return this.sftp.connect({
+  return sftp.connect({
     host: conf.host,
     port: conf.port,
     username: conf.username,
@@ -63,7 +62,7 @@ class StoreFacility extends Base {
           }
         }
 
-        client(conf)
+        this.cli = client(conf)
           .then(() => {
             next(null)
           })
@@ -75,12 +74,12 @@ class StoreFacility extends Base {
   }
 
   _stop (cb) {
-    this.sftp.async.series([
+    this.cli.async.series([
       next => { super._stop(next) },
       next => {
-        this.sftp.end()
-        this.sftp.on('end', () => {
-          delete this.sftp
+        this.cli.end()
+        this.cli.on('end', () => {
+          delete this.cli
           next()
         })
       }
