@@ -9,13 +9,15 @@ const SFTP2 = require('ssh2-sftp-client')
 function client (conf, label) {
   const sftp = new SFTP2()
 
-  return sftp.connect({
+  sftp.connect({
     host: conf.host,
     port: conf.port,
     username: conf.username,
     password: conf.password,
     privateKey: conf.privateKey
   })
+
+  return sftp
 }
 
 class StoreFacility extends Base {
