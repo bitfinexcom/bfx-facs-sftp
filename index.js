@@ -55,6 +55,7 @@ class StoreFacility extends Base {
         if (privateKey) {
           try {
             privateKey = fs.readFileSync(privateKey, { encoding: 'utf8' })
+            conf.privateKey = privateKey
           } catch (e) {
             return next(
               new Error('ERR_SFTP_PRIVATE_KEY')
