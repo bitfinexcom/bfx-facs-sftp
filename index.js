@@ -6,20 +6,6 @@ const _ = require('lodash')
 const Base = require('bfx-facs-base')
 const SFTP2 = require('ssh2-sftp-client')
 
-function client (conf, label) {
-  const sftp = new SFTP2()
-
-  sftp.connect({
-    host: conf.host,
-    port: conf.port,
-    username: conf.username,
-    password: conf.password,
-    privateKey: conf.privateKey
-  })
-
-  return sftp
-}
-
 class StoreFacility extends Base {
   constructor (caller, opts, ctx) {
     super(caller, opts, ctx)
@@ -65,7 +51,15 @@ class StoreFacility extends Base {
           }
         }
 
-        this.cli = client(conf)
+        this.cli = new SFTP2()
+
+        this.cli.connect({
+          host: conf.host,
+          port: conf.port,
+          username: conf.username,
+          password: conf.password,
+          privateKey: conf.privateKey
+        })
           .then(() => {
             next(null)
           })
