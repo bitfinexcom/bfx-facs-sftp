@@ -75,7 +75,7 @@ class StoreFacility extends Base {
   }
 
   _stop (cb) {
-    this.cli.async.series([
+    async.series([
       next => { super._stop(next) },
       next => {
         this.cli.end()
