@@ -1,6 +1,7 @@
 'use strict'
 
 const async = require('async')
+const fs = require('fs')
 const _ = require('lodash')
 const Base = require('bfx-facs-base')
 let Client = require('ssh2-sftp-client')
@@ -38,7 +39,7 @@ class StoreFacility extends Base {
           'privateKey'
         ])
 
-        const {
+        let {
           host,
           port,
           username,
@@ -46,10 +47,20 @@ class StoreFacility extends Base {
           privateKey
         } = conf
 
-        if (!host || !port || !username || !(password || privateKey) {
+        if (!host || !port || !username || !(password || privateKey)) {
           return next(
-            new Error('Host, port, username or password is missing in config')
+            new Error('ERR_SFTP_CONF')
           )
+        }
+
+        if (privateKey) {
+          try {
+            privateKey = fs.readFileSync(privateKey, { encoding: 'utf8' })
+          } catch (e) {
+            return next(
+              new Error('ERR_SFTP_PRIVATE_KEY')
+            )
+          }
         }
 
         client(conf)
